@@ -8,28 +8,40 @@ exports = (typeof window === 'undefined') ? global : window;
 
 exports.bestPracticesAnswers = {
   globals : function() {
-    myObject = {
+    this.myObject = {
       name : 'Jory'
     };
 
-    return myObject;
+    return this;
   },
 
   functions : function(flag) {
+    
+    var getValue;
+    
     if (flag) {
-      function getValue() { return 'a'; }
+      getValue = function() {
+        return 'a';
+      }
     } else {
-      function getValue() { return 'b'; }
+      getValue = function() {
+        return 'b';
+      }
     }
 
     return getValue();
   },
 
   parseInt : function(num) {
-    return parseInt(num);
+    if(num.indexOf("x") !== -1) {
+      var array = num.split("x");
+      return parseInt(array[0], array[1]);
+    } else {
+      return parseInt(num);
+    }
   },
 
   identity : function(val1, val2) {
-
+    return val1 === val2;
   }
 };
